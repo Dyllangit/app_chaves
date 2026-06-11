@@ -1,0 +1,26 @@
+<div class="card shadow border-0">
+    <div class="card-body p-4 p-md-5">
+        <div class="text-center mb-4">
+            <i class="bi bi-shield-lock text-primary display-5"></i>
+            <h5 class="fw-bold mt-2">Nova senha</h5>
+        </div>
+
+        <form method="POST" action="/redefinir-senha" novalidate>
+            <input type="hidden" name="token" value="<%= token %>">
+
+            <div class="mb-3">
+                <label for="senha" class="form-label">Nova senha</label>
+                <input type="password" class="form-control" id="senha" name="senha"
+                       minlength="6" required autofocus>
+            </div>
+            <div class="mb-4">
+                <label for="confirmar_senha" class="form-label">Confirmar senha</label>
+                <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha"
+                       minlength="6" required>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Redefinir senha</button>
+            </div>
+        </form>
+    </div>
+</div>

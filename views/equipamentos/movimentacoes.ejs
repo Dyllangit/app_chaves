@@ -1,0 +1,60 @@
+<h4 class="mb-4">Empréstimos de equipamentos — hoje</h4>
+
+<% if (!itens || itens.length === 0) { %>
+<div class="alert alert-info">Nenhum empréstimo de equipamento para hoje.</div>
+<% } else { %>
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Horário</th>
+                    <th>Solicitante</th>
+                    <th>Equipamento</th>
+                    <th>Categoria</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% itens.forEach(item => { %>
+                <tr>
+                    <td><%= item.horario_inicio.slice(0,5) %> – <%= item.horario_fim.slice(0,5) %></td>
+                    <td><%= item.pessoa_nome %></td>
+                    <td><%= item.equipamento_nome %></td>
+                    <td><%= item.categoria %></td>
+                    <td>
+                        <span class="badge <%=
+                            item.status === 'confirmada'             ? 'bg-secondary' :
+                            item.status === 'equipamento_entregue'   ? 'bg-warning text-dark' :
+                            item.status === 'equipamento_devolvido'  ? 'bg-success' : 'bg-danger'
+                        %>">
+                            <%= item.status.replace(/_/g,' ') %>
+                        </span>
+                    </td>
+                    <td>
+                        <% if (item.status === 'confirmada') { %>
+                        <form method="POST" action="/equipamentos/retirada/<%= item.id %>" class="d-inline">
+                            <input type="hidden" name="reserva_equipamento_id" value="<%= item.id %>">
+                            <input type="hidden" name="equipamento_id" value="<%= item.equipamento_id %>">
+                            <button type="submit" class="btn btn-sm btn-warning">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>Retirada
+                            </button>
+                        </form>
+                        <% } else if (item.status === 'equipamento_entregue') { %>
+                        <form method="POST" action="/equipamentos/devolucao/<%= item.id %>" class="d-inline">
+                            <input type="hidden" name="reserva_equipamento_id" value="<%= item.id %>">
+                            <input type="hidden" name="equipamento_id" value="<%= item.equipamento_id %>">
+                            <button type="submit" class="btn btn-sm btn-success">
+                                <i class="bi bi-box-arrow-in-down-left me-1"></i>Devolução
+                            </button>
+                        </form>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% } %>

@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0"><%= ambiente ? 'Editar ambiente' : 'Novo ambiente' %></h4>
+    <a href="/admin/ambientes" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left me-1"></i>Voltar
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <form method="POST" action="/admin/ambientes/<%= ambiente ? ambiente.id + '/editar' : 'novo' %>">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nome *</label>
+                    <input type="text" class="form-control" name="nome"
+                           value="<%= ambiente ? ambiente.nome : '' %>" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Tipo *</label>
+                    <select class="form-select" name="tipo" required>
+                        <% ['sala','laboratorio','auditorio'].forEach(t => { %>
+                        <option value="<%= t %>" <%= ambiente && ambiente.tipo === t ? 'selected' : '' %>><%= t %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Capacidade</label>
+                    <input type="number" class="form-control" name="capacidade" min="1"
+                           value="<%= ambiente ? (ambiente.capacidade || '') : '' %>">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Localização</label>
+                    <input type="text" class="form-control" name="localizacao"
+                           value="<%= ambiente ? (ambiente.localizacao || '') : '' %>"
+                           placeholder="Ex: Bloco A, 2º andar">
+                </div>
+                <% if (!ambiente) { %>
+                <div class="col-md-6">
+                    <label class="form-label">Código da chave</label>
+                    <input type="text" class="form-control" name="chave_codigo"
+                           placeholder="Ex: S01, LAB-02">
+                    <div class="form-text">Deixe vazio se a chave for cadastrada depois.</div>
+                </div>
+                <% } %>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-floppy me-1"></i>Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

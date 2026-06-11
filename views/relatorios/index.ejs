@@ -1,0 +1,73 @@
+<h4 class="mb-4">Relatórios</h4>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <form method="POST" action="/relatorios" class="row g-3 align-items-end">
+            <div class="col-md-3">
+                <label class="form-label">Tipo de relatório</label>
+                <select class="form-select" name="tipo" required>
+                    <option value="">Selecione…</option>
+                    <option value="ambientes"    <%= typeof tipo !== 'undefined' && tipo === 'ambientes'    ? 'selected' : '' %>>Uso de ambientes</option>
+                    <option value="equipamentos" <%= typeof tipo !== 'undefined' && tipo === 'equipamentos' ? 'selected' : '' %>>Empréstimos de equipamentos</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Data início</label>
+                <input type="date" class="form-control" name="data_inicio"
+                       value="<%= typeof data_inicio !== 'undefined' ? data_inicio : '' %>" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Data fim</label>
+                <input type="date" class="form-control" name="data_fim"
+                       value="<%= typeof data_fim !== 'undefined' ? data_fim : '' %>" required>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-bar-chart-line me-1"></i>Gerar relatório
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<% if (typeof dados !== 'undefined' && dados !== null && dados.length > 0) { %>
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0 pb-0">
+        <h6 class="mb-0">
+            Resultado: <%= tipo === 'ambientes' ? 'Uso de ambientes' : 'Empréstimos de equipamentos' %>
+            &nbsp;<small class="text-muted">(<%= data_inicio %> a <%= data_fim %>)</small>
+        </h6>
+    </div>
+    <div class="table-responsive">
+        <table class="table mb-0">
+            <thead class="table-light">
+                <% if (tipo === 'ambientes') { %>
+                <tr><th>Ambiente</th><th>Tipo</th><th>Total</th><th>Concluídas</th><th>Canceladas</th></tr>
+                <% } else { %>
+                <tr><th>Equipamento</th><th>Categoria</th><th>Empréstimos</th><th>Devolvidos</th></tr>
+                <% } %>
+            </thead>
+            <tbody>
+                <% dados.forEach(row => { %>
+                <tr>
+                    <% if (tipo === 'ambientes') { %>
+                    <td><%= row.ambiente %></td>
+                    <td><%= row.tipo %></td>
+                    <td><strong><%= row.total_reservas %></strong></td>
+                    <td class="text-success"><%= row.concluidas %></td>
+                    <td class="text-secondary"><%= row.canceladas %></td>
+                    <% } else { %>
+                    <td><%= row.equipamento %></td>
+                    <td><%= row.categoria %></td>
+                    <td><strong><%= row.total_emprestimos %></strong></td>
+                    <td class="text-success"><%= row.devolvidos %></td>
+                    <% } %>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% } else if (typeof dados !== 'undefined' && dados !== null && dados.length === 0) { %>
+<div class="alert alert-info">Nenhum dado encontrado para o período selecionado.</div>
+<% } %>

@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">Minhas reservas</h4>
+    <div>
+        <a href="/reservas/nova-ambiente"    class="btn btn-primary me-2"><i class="bi bi-door-open me-1"></i>Reservar ambiente</a>
+        <a href="/reservas/nova-equipamento" class="btn btn-outline-primary"><i class="bi bi-display me-1"></i>Reservar equipamento</a>
+    </div>
+</div>
+
+<% if (!reservas || reservas.length === 0) { %>
+<div class="alert alert-info">Nenhuma reserva encontrada.</div>
+<% } else { %>
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Ambientes</th>
+                    <th>Equipamentos</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reservas.forEach(r => { %>
+                <tr>
+                    <td><%= r.id %></td>
+                    <td><%= new Date(r.data).toLocaleDateString('pt-BR') %></td>
+                    <td><%= r.horario_inicio.slice(0,5) %> – <%= r.horario_fim.slice(0,5) %></td>
+                    <td><small><%= r.ambientes || '—' %></small></td>
+                    <td><small><%= r.equipamentos || '—' %></small></td>
+                    <td>
+                        <span class="badge <%= r.status === 'confirmada' ? 'bg-success' : 'bg-secondary' %>">
+                            <%= r.status %>
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/reservas/<%= r.id %>" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% } %>

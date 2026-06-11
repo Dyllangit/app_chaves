@@ -1,0 +1,51 @@
+<h4 class="mb-1">Devoluções em atraso</h4>
+<p class="text-muted mb-4 small">Reservas cujo horário de fim já passou e o item não foi devolvido.</p>
+
+<% if (!atrasos || atrasos.length === 0) { %>
+<div class="alert alert-success">
+    <i class="bi bi-check-circle-fill me-2"></i>Nenhuma devolução em atraso no momento.
+</div>
+<% } else { %>
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Tipo</th>
+                    <th>Recurso</th>
+                    <th>Responsável</th>
+                    <th>Data/Fim</th>
+                    <th>Notificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% atrasos.forEach(a => { %>
+                <tr class="table-danger">
+                    <td>
+                        <span class="badge <%= a.tipo === 'chave' ? 'bg-warning text-dark' : 'bg-info text-dark' %>">
+                            <i class="bi bi-<%= a.tipo === 'chave' ? 'key' : 'display' %> me-1"></i><%= a.tipo %>
+                        </span>
+                    </td>
+                    <td><%= a.recurso %></td>
+                    <td>
+                        <%= a.responsavel %><br>
+                        <small class="text-muted"><%= a.email_responsavel %></small>
+                    </td>
+                    <td>
+                        <%= new Date(a.data).toLocaleDateString('pt-BR') %>
+                        <span class="text-danger fw-bold">até <%= a.horario_fim.slice(0,5) %></span>
+                    </td>
+                    <td>
+                        <form method="POST" action="/atrasos/notificar/<%= a.tipo %>/<%= a.item_id %>">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-envelope me-1"></i>Notificar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% } %>

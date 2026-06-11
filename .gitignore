@@ -1,0 +1,6 @@
+node_modules/
+.env
+public/css/bootstrap.min.css
+public/css/bootstrap-icons.css
+public/css/fonts/
+public/js/bootstrap.bundle.min.js

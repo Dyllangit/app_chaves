@@ -1,0 +1,53 @@
+<h4 class="mb-4">Movimentação de chaves — hoje</h4>
+
+<% if (!reservas || reservas.length === 0) { %>
+<div class="alert alert-info">Nenhuma reserva de ambiente para hoje.</div>
+<% } else { %>
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Horário</th>
+                    <th>Solicitante</th>
+                    <th>Ambiente</th>
+                    <th>Chave</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reservas.forEach(r => { %>
+                <tr>
+                    <td><%= r.horario_inicio.slice(0,5) %> – <%= r.horario_fim.slice(0,5) %></td>
+                    <td><%= r.pessoa_nome %></td>
+                    <td><%= r.ambiente_nome %></td>
+                    <td><%= r.chave_status ? r.chave_status : '—' %></td>
+                    <td>
+                        <span class="badge <%=
+                            r.ra_status === 'confirmada'      ? 'bg-secondary' :
+                            r.ra_status === 'chave_entregue'  ? 'bg-warning text-dark' :
+                            r.ra_status === 'chave_devolvida' ? 'bg-success' :
+                            'bg-danger'
+                        %>">
+                            <%= r.ra_status.replace(/_/g,' ') %>
+                        </span>
+                    </td>
+                    <td>
+                        <% if (r.ra_status === 'confirmada') { %>
+                        <a href="/chaves/retirada/<%= r.id %>" class="btn btn-sm btn-warning">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>Retirada
+                        </a>
+                        <% } else if (r.ra_status === 'chave_entregue') { %>
+                        <a href="/chaves/devolucao/<%= r.id %>" class="btn btn-sm btn-success">
+                            <i class="bi bi-box-arrow-in-down-left me-1"></i>Devolução
+                        </a>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% } %>

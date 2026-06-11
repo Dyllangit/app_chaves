@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">Ambientes</h4>
+    <a href="/admin/ambientes/novo" class="btn btn-primary">
+        <i class="bi bi-building-add me-1"></i>Novo ambiente
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr><th>Nome</th><th>Tipo</th><th>Capacidade</th><th>Localização</th><th>Ativo</th><th></th></tr>
+            </thead>
+            <tbody>
+                <% ambientes.forEach(a => { %>
+                <tr class="<%= !a.ativo ? 'text-muted' : '' %>">
+                    <td><%= a.nome %></td>
+                    <td><%= a.tipo %></td>
+                    <td><%= a.capacidade || '—' %></td>
+                    <td><%= a.localizacao || '—' %></td>
+                    <td>
+                        <span class="badge <%= a.ativo ? 'bg-success' : 'bg-danger' %>">
+                            <%= a.ativo ? 'Sim' : 'Não' %>
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <a href="/admin/ambientes/<%= a.id %>/editar" class="btn btn-sm btn-outline-secondary me-1">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <form method="POST" action="/admin/ambientes/<%= a.id %>/toggle-ativo" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-<%= a.ativo ? 'danger' : 'success' %>">
+                                <i class="bi bi-<%= a.ativo ? 'eye-slash' : 'eye' %>"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

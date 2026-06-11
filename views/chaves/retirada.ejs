@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">Retirada de chave</h4>
+    <a href="/chaves" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Voltar</a>
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-4">Ambiente</dt>  <dd class="col-8"><%= ra.ambiente_nome %></dd>
+            <dt class="col-4">Solicitante</dt><dd class="col-8"><%= ra.pessoa_nome %></dd>
+            <dt class="col-4">Data/Hora</dt> <dd class="col-8"><%= new Date(ra.data).toLocaleDateString('pt-BR') %> &nbsp; <%= ra.horario_inicio.slice(0,5) %> – <%= ra.horario_fim.slice(0,5) %></dd>
+            <dt class="col-4">Chave</dt>     <dd class="col-8"><%= ra.codigo || 'Não cadastrada' %></dd>
+        </dl>
+    </div>
+</div>
+
+<form method="POST" action="/chaves/retirada/<%= ra.id %>">
+    <input type="hidden" name="reserva_ambiente_id" value="<%= ra.id %>">
+    <input type="hidden" name="chave_id"            value="<%= ra.chave_id %>">
+
+    <div class="mb-3">
+        <label class="form-label">Observações <span class="text-muted">(opcional)</span></label>
+        <textarea class="form-control" name="observacoes" rows="2"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-warning">
+        <i class="bi bi-box-arrow-up-right me-1"></i>Confirmar retirada
+    </button>
+</form>

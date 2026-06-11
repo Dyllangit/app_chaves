@@ -1,0 +1,27 @@
+{
+  "name": "sisgeri",
+  "version": "1.0.0",
+  "description": "Sistema de Gestão de Recursos e Equipamentos — IC UFMT",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "setup": "node scripts/setup.js",
+    "criar-admin": "node scripts/criarAdmin.js"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.22.5",
+    "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

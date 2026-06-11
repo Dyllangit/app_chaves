@@ -1,0 +1,95 @@
+<h4 class="mb-4">Reservar ambiente</h4>
+
+<!-- Passo 1: escolha de data/hora para busca -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <h6 class="card-title mb-3">1. Selecione data e horário</h6>
+        <form method="POST" action="/reservas/buscar-ambientes" class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Data</label>
+                <input type="date" class="form-control" name="data"
+                       value="<%= typeof data !== 'undefined' ? data : '' %>"
+                       min="<%= new Date().toISOString().split('T')[0] %>" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Início</label>
+                <input type="time" class="form-control" name="horario_inicio"
+                       value="<%= typeof horario_inicio !== 'undefined' ? horario_inicio : '' %>" required>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Fim</label>
+                <input type="time" class="form-control" name="horario_fim"
+                       value="<%= typeof horario_fim !== 'undefined' ? horario_fim : '' %>" required>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-outline-primary w-100">
+                    <i class="bi bi-search"></i> Buscar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Passo 2: selecionar ambiente disponível -->
+<% if (typeof ambientes !== 'undefined' && ambientes.length > 0) { %>
+<div class="card border-0 shadow-sm">
+    <div class="card-body">
+        <h6 class="card-title mb-3">2. Escolha o ambiente</h6>
+        <form method="POST" action="/reservas/nova-ambiente">
+            <input type="hidden" name="data"           value="<%= data %>">
+            <input type="hidden" name="horario_inicio" value="<%= horario_inicio %>">
+            <input type="hidden" name="horario_fim"    value="<%= horario_fim %>">
+
+            <div class="row g-3 mb-4">
+                <% ambientes.forEach(a => { %>
+                <div class="col-md-4">
+                    <div class="form-check card p-3 h-100">
+                        <input class="form-check-input" type="radio" name="ambiente_id"
+                               id="amb_<%= a.id %>" value="<%= a.id %>" required>
+                        <label class="form-check-label w-100" for="amb_<%= a.id %>">
+                            <strong><%= a.nome %></strong><br>
+                            <small class="text-muted">
+                                <%= a.tipo %> · <%= a.capacidade ? a.capacidade + ' lugares' : '' %>
+                                <% if (a.localizacao) { %> · <%= a.localizacao %><% } %>
+                            </small>
+                        </label>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+
+            <!-- Dados do evento (opcional) -->
+            <div class="border-top pt-3 mb-3">
+                <h6>Dados do evento <span class="text-muted fw-normal">(opcional)</span></h6>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Tipo de evento</label>
+                        <input type="text" class="form-control" name="tipo_evento" placeholder="Aula, reunião, palestra…">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Docente responsável</label>
+                        <input type="text" class="form-control" name="docente_responsavel">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Pessoa autorizada</label>
+                        <input type="text" class="form-control" name="pessoa_autorizada">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Descrição</label>
+                        <textarea class="form-control" name="descricao" rows="2"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle me-1"></i>Confirmar reserva
+            </button>
+        </form>
+    </div>
+</div>
+<% } else if (typeof ambientes !== 'undefined' && ambientes.length === 0) { %>
+<div class="alert alert-warning">
+    <i class="bi bi-exclamation-triangle me-2"></i>
+    Nenhum ambiente disponível para o horário selecionado.
+</div>
+<% } %>
