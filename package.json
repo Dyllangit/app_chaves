@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "postinstall": "node scripts/setup.js",
     "setup": "node scripts/setup.js",
     "criar-admin": "node scripts/criarAdmin.js"
   },
