@@ -5,7 +5,7 @@
 USE sisgeri;
 
 -- Configurações do sistema
-INSERT INTO configuracao (chave, valor, descricao) VALUES
+INSERT IGNORE INTO configuracao (chave, valor, descricao) VALUES
 ('horario_abertura',   '07:00', 'Horário de abertura do IC'),
 ('horario_fechamento', '22:00', 'Horário de fechamento do IC'),
 ('antecedencia_minima_horas', '1', 'Horas mínimas de antecedência para reserva');
