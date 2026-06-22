@@ -8,7 +8,7 @@ USE sisgeri;
 -- --------------------------------------------------------
 -- CONFIGURACAO
 -- --------------------------------------------------------
-CREATE TABLE configuracao (
+CREATE TABLE IF NOT EXISTS configuracao (
     id    INT AUTO_INCREMENT PRIMARY KEY,
     chave VARCHAR(50)  NOT NULL UNIQUE,
     valor VARCHAR(255) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE configuracao (
 -- --------------------------------------------------------
 -- PESSOA
 -- --------------------------------------------------------
-CREATE TABLE pessoa (
+CREATE TABLE IF NOT EXISTS pessoa (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     nome       VARCHAR(100) NOT NULL,
     matricula  VARCHAR(20)  UNIQUE,
@@ -34,7 +34,7 @@ CREATE TABLE pessoa (
 -- --------------------------------------------------------
 -- AMBIENTE
 -- --------------------------------------------------------
-CREATE TABLE ambiente (
+CREATE TABLE IF NOT EXISTS ambiente (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     nome        VARCHAR(100) NOT NULL,
     tipo        ENUM('sala','laboratorio','auditorio') NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE ambiente (
 -- --------------------------------------------------------
 -- CHAVE
 -- --------------------------------------------------------
-CREATE TABLE chave (
+CREATE TABLE IF NOT EXISTS chave (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     codigo      VARCHAR(50) NOT NULL,
     status      ENUM('disponivel','entregue','extraviada') NOT NULL DEFAULT 'disponivel',
@@ -58,7 +58,7 @@ CREATE TABLE chave (
 -- --------------------------------------------------------
 -- EQUIPAMENTO
 -- --------------------------------------------------------
-CREATE TABLE equipamento (
+CREATE TABLE IF NOT EXISTS equipamento (
     id                INT AUTO_INCREMENT PRIMARY KEY,
     nome              VARCHAR(100) NOT NULL,
     categoria         VARCHAR(50)  NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE equipamento (
 -- --------------------------------------------------------
 -- RESERVA (cabeçalho)
 -- --------------------------------------------------------
-CREATE TABLE reserva (
+CREATE TABLE IF NOT EXISTS reserva (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     pessoa_id      INT  NOT NULL,
     data           DATE NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE reserva (
 -- DETALHE DO EVENTO
 -- Informações extras para reservas de ambientes (quando há evento)
 -- --------------------------------------------------------
-CREATE TABLE detalhe_evento (
+CREATE TABLE IF NOT EXISTS detalhe_evento (
     id                  INT AUTO_INCREMENT PRIMARY KEY,
     reserva_id          INT NOT NULL UNIQUE,
     tipo_evento         VARCHAR(50) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE detalhe_evento (
 -- --------------------------------------------------------
 -- RESERVA DE AMBIENTE
 -- --------------------------------------------------------
-CREATE TABLE reserva_ambiente (
+CREATE TABLE IF NOT EXISTS reserva_ambiente (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     reserva_id  INT NOT NULL,
     ambiente_id INT NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE reserva_ambiente (
 -- RESERVA DE EQUIPAMENTO
 -- reserva_ambiente_id é nullable: equipamento pode ser reservado independentemente
 -- --------------------------------------------------------
-CREATE TABLE reserva_equipamento (
+CREATE TABLE IF NOT EXISTS reserva_equipamento (
     id                  INT AUTO_INCREMENT PRIMARY KEY,
     reserva_id          INT NOT NULL,
     equipamento_id      INT NOT NULL,
@@ -127,7 +127,7 @@ CREATE TABLE reserva_equipamento (
 -- --------------------------------------------------------
 -- MOVIMENTAÇÃO DE CHAVE
 -- --------------------------------------------------------
-CREATE TABLE mov_chave (
+CREATE TABLE IF NOT EXISTS mov_chave (
     id                  INT AUTO_INCREMENT PRIMARY KEY,
     chave_id            INT NOT NULL,
     reserva_ambiente_id INT NOT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE mov_chave (
 -- --------------------------------------------------------
 -- MOVIMENTAÇÃO DE EQUIPAMENTO
 -- --------------------------------------------------------
-CREATE TABLE mov_equipamento (
+CREATE TABLE IF NOT EXISTS mov_equipamento (
     id                      INT AUTO_INCREMENT PRIMARY KEY,
     equipamento_id          INT NOT NULL,
     reserva_equipamento_id  INT NOT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE mov_equipamento (
 -- --------------------------------------------------------
 -- TOKEN DE REDEFINIÇÃO DE SENHA
 -- --------------------------------------------------------
-CREATE TABLE token_redefinicao (
+CREATE TABLE IF NOT EXISTS token_redefinicao (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     pessoa_id  INT         NOT NULL,
     token      VARCHAR(64) NOT NULL UNIQUE,
