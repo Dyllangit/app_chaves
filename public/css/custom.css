@@ -1,16 +1,16 @@
-/* SISGERI — Paleta Verde Floresta */
+/* SISGERI — Paleta Azul */
 
 :root {
-    --bs-primary:          #2d6a4f;
-    --bs-primary-rgb:      45, 106, 79;
-    --bs-link-color:       #2d6a4f;
-    --bs-link-color-rgb:   45, 106, 79;
-    --bs-link-hover-color: #1b4332;
+    --bs-primary:          #1a5fa3;
+    --bs-primary-rgb:      26, 95, 163;
+    --bs-link-color:       #1a5fa3;
+    --bs-link-color-rgb:   26, 95, 163;
+    --bs-link-hover-color: #1a3a5c;
 }
 
 /* ── Corpo ─────────────────────────────────────────────────────────────────── */
 body {
-    background-color: #f1f8f4 !important;
+    background-color: #f0f5ff !important;
     font-size: 1rem;
 }
 
@@ -37,82 +37,82 @@ body {
 
 /* ── Botões primários ───────────────────────────────────────────────────────── */
 .btn-primary {
-    background-color: #2d6a4f;
-    border-color:     #2d6a4f;
+    background-color: #1a5fa3;
+    border-color:     #1a5fa3;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active {
-    background-color: #245a42 !important;
-    border-color:     #245a42 !important;
+    background-color: #154d8c !important;
+    border-color:     #154d8c !important;
 }
 .btn-outline-primary {
-    color:        #2d6a4f;
-    border-color: #2d6a4f;
+    color:        #1a5fa3;
+    border-color: #1a5fa3;
 }
 .btn-outline-primary:hover {
-    background-color: #2d6a4f;
-    border-color:     #2d6a4f;
+    background-color: #1a5fa3;
+    border-color:     #1a5fa3;
     color: #fff;
 }
 
 /* ── Links ─────────────────────────────────────────────────────────────────── */
 a:not(.btn):not(.nav-link):not(.navbar-brand):not(.dropdown-item):not(.badge) {
-    color: #2d6a4f;
+    color: #1a5fa3;
 }
 a:not(.btn):not(.nav-link):not(.navbar-brand):not(.dropdown-item):not(.badge):hover {
-    color: #1b4332;
+    color: #1a3a5c;
 }
 
 /* ── Texto e badges ─────────────────────────────────────────────────────────── */
-.text-primary           { color: #2d6a4f !important; }
-.bg-primary             { background-color: #2d6a4f !important; }
-.badge.bg-primary       { background-color: #2d6a4f !important; }
-.border-primary         { border-color: #2d6a4f !important; }
+.text-primary           { color: #1a5fa3 !important; }
+.bg-primary             { background-color: #1a5fa3 !important; }
+.badge.bg-primary       { background-color: #1a5fa3 !important; }
+.border-primary         { border-color: #1a5fa3 !important; }
 
 /* ── Inputs ────────────────────────────────────────────────────────────────── */
 .form-control,
 .form-select {
-    background-color: #eef6f1;
-    border-color:     #8bbda4;
+    background-color: #edf4fc;
+    border-color:     #89b8dd;
     color:            #1a1a1a;
 }
 .form-control::placeholder {
-    color: #6b8c7a;
+    color: #6b8ab5;
 }
 .form-control:focus,
 .form-select:focus,
 .form-check-input:focus {
-    background-color: #e2f0e8;
-    border-color:     #2d6a4f;
-    box-shadow:       0 0 0 0.25rem rgba(45, 106, 79, 0.25);
+    background-color: #daeaf8;
+    border-color:     #1a5fa3;
+    box-shadow:       0 0 0 0.25rem rgba(26, 95, 163, 0.25);
     color:            #1a1a1a;
 }
 .form-check-input:checked {
-    background-color: #2d6a4f;
-    border-color:     #2d6a4f;
+    background-color: #1a5fa3;
+    border-color:     #1a5fa3;
 }
 .form-label {
     font-weight: 600;
-    color:       #1b4332;
+    color:       #1a3a5c;
 }
 
 /* ── Cards ─────────────────────────────────────────────────────────────────── */
 .card {
     background-color: #ffffff;
-    border-color:     #b7d9c4;
-    box-shadow:       0 1px 4px rgba(27, 67, 50, 0.08);
+    border-color:     #b3cfea;
+    box-shadow:       0 1px 4px rgba(26, 58, 92, 0.08);
 }
 
 /* ── Tabelas ───────────────────────────────────────────────────────────────── */
 .table-light th {
-    background-color: #dff0e4 !important;
-    color: #1b4332;
+    background-color: #d6eaf8 !important;
+    color: #1a3a5c;
 }
 
 /* ── Tela de login ─────────────────────────────────────────────────────────── */
 body.login-bg {
-    background-color: #1b4332 !important;
-    background-image: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%) !important;
+    background-color: #1a3a5c !important;
+    background-image: linear-gradient(135deg, #1a3a5c 0%, #1a5fa3 100%) !important;
 }
