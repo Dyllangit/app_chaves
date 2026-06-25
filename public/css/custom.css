@@ -1,0 +1,85 @@
+/* SISGERI — Paleta Verde Floresta */
+
+:root {
+    --bs-primary:          #2d6a4f;
+    --bs-primary-rgb:      45, 106, 79;
+    --bs-link-color:       #2d6a4f;
+    --bs-link-color-rgb:   45, 106, 79;
+    --bs-link-hover-color: #1b4332;
+}
+
+/* ── Corpo ─────────────────────────────────────────────────────────────────── */
+body {
+    background-color: #f1f8f4 !important;
+    font-size: 1rem;
+}
+
+/* ── Navbar ────────────────────────────────────────────────────────────────── */
+.navbar.bg-primary {
+    background-color: #1b4332 !important;
+}
+
+/* ── Botões primários ───────────────────────────────────────────────────────── */
+.btn-primary {
+    background-color: #2d6a4f;
+    border-color:     #2d6a4f;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #245a42 !important;
+    border-color:     #245a42 !important;
+}
+.btn-outline-primary {
+    color:        #2d6a4f;
+    border-color: #2d6a4f;
+}
+.btn-outline-primary:hover {
+    background-color: #2d6a4f;
+    border-color:     #2d6a4f;
+    color: #fff;
+}
+
+/* ── Links ─────────────────────────────────────────────────────────────────── */
+a:not(.btn):not(.nav-link):not(.navbar-brand):not(.dropdown-item):not(.badge) {
+    color: #2d6a4f;
+}
+a:not(.btn):not(.nav-link):not(.navbar-brand):not(.dropdown-item):not(.badge):hover {
+    color: #1b4332;
+}
+
+/* ── Texto e badges ─────────────────────────────────────────────────────────── */
+.text-primary           { color: #2d6a4f !important; }
+.bg-primary             { background-color: #2d6a4f !important; }
+.badge.bg-primary       { background-color: #2d6a4f !important; }
+.border-primary         { border-color: #2d6a4f !important; }
+
+/* ── Inputs ────────────────────────────────────────────────────────────────── */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    border-color: #52b788;
+    box-shadow:   0 0 0 0.25rem rgba(45, 106, 79, 0.2);
+}
+.form-check-input:checked {
+    background-color: #2d6a4f;
+    border-color:     #2d6a4f;
+}
+
+/* ── Cards ─────────────────────────────────────────────────────────────────── */
+.card {
+    border-color: #d4e8da;
+}
+
+/* ── Tabelas ───────────────────────────────────────────────────────────────── */
+.table-light th {
+    background-color: #dff0e4 !important;
+    color: #1b4332;
+}
+
+/* ── Tela de login ─────────────────────────────────────────────────────────── */
+body.login-bg {
+    background-color: #1b4332 !important;
+    background-image: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%) !important;
+}
