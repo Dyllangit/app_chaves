@@ -56,20 +56,37 @@ a:not(.btn):not(.nav-link):not(.navbar-brand):not(.dropdown-item):not(.badge):ho
 .border-primary         { border-color: #2d6a4f !important; }
 
 /* ── Inputs ────────────────────────────────────────────────────────────────── */
+.form-control,
+.form-select {
+    background-color: #eef6f1;
+    border-color:     #8bbda4;
+    color:            #1a1a1a;
+}
+.form-control::placeholder {
+    color: #6b8c7a;
+}
 .form-control:focus,
 .form-select:focus,
 .form-check-input:focus {
-    border-color: #52b788;
-    box-shadow:   0 0 0 0.25rem rgba(45, 106, 79, 0.2);
+    background-color: #e2f0e8;
+    border-color:     #2d6a4f;
+    box-shadow:       0 0 0 0.25rem rgba(45, 106, 79, 0.25);
+    color:            #1a1a1a;
 }
 .form-check-input:checked {
     background-color: #2d6a4f;
     border-color:     #2d6a4f;
 }
+.form-label {
+    font-weight: 600;
+    color:       #1b4332;
+}
 
 /* ── Cards ─────────────────────────────────────────────────────────────────── */
 .card {
-    border-color: #d4e8da;
+    background-color: #ffffff;
+    border-color:     #b7d9c4;
+    box-shadow:       0 1px 4px rgba(27, 67, 50, 0.08);
 }
 
 /* ── Tabelas ───────────────────────────────────────────────────────────────── */

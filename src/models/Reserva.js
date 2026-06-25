@@ -65,7 +65,6 @@ class Reserva {
     }
 
     static async listarHoje() {
-        const hoje = new Date().toISOString().split('T')[0];
         const [rows] = await db.query(`
             SELECT r.*, ra.id AS ra_id, p.nome AS pessoa_nome,
                    a.nome AS ambiente_nome, ra.status AS ra_status,
@@ -75,9 +74,9 @@ class Reserva {
             JOIN reserva_ambiente ra ON ra.reserva_id = r.id
             JOIN ambiente         a  ON a.id  = ra.ambiente_id
             LEFT JOIN chave       c  ON c.ambiente_id = a.id
-            WHERE r.data = ? AND r.status = 'confirmada'
+            WHERE r.data = CURDATE() AND r.status = 'confirmada'
             ORDER BY r.horario_inicio
-        `, [hoje]);
+        `);
         return rows;
     }
 
@@ -119,7 +118,7 @@ class Reserva {
             JOIN ambiente a ON a.id  = ra.ambiente_id
             JOIN pessoa   p ON p.id  = r.pessoa_id
             WHERE ra.status = 'chave_entregue'
-              AND CONCAT(r.data, ' ', r.horario_fim) < NOW()
+              AND TIMESTAMP(r.data, r.horario_fim) < NOW()
 
             UNION ALL
 
@@ -136,7 +135,7 @@ class Reserva {
             JOIN equipamento e ON e.id  = re.equipamento_id
             JOIN pessoa      p ON p.id  = r.pessoa_id
             WHERE re.status = 'equipamento_entregue'
-              AND CONCAT(r.data, ' ', r.horario_fim) < NOW()
+              AND TIMESTAMP(r.data, r.horario_fim) < NOW()
 
             ORDER BY data ASC, horario_fim ASC
         `);

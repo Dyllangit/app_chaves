@@ -7,7 +7,9 @@ const chaveController = {
     // GET /chaves  — listagem do dia (funcionário/gestor)
     async index(req, res) {
         const reservas = await Reserva.listarHoje();
-        res.render('chaves/index', { title: 'Movimentação de chaves', reservas });
+        const modalSuccess = res.locals.success || [];
+        res.locals.success = [];   // evita duplicar no banner de alertas
+        res.render('chaves/index', { title: 'Movimentação de chaves', reservas, modalSuccess });
     },
 
     // GET /chaves/retirada/:reserva_ambiente_id
