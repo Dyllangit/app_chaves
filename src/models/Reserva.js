@@ -67,7 +67,7 @@ class Reserva {
     static async listarHoje() {
         const hoje = new Date().toISOString().split('T')[0];
         const [rows] = await db.query(`
-            SELECT r.*, p.nome AS pessoa_nome,
+            SELECT r.*, ra.id AS ra_id, p.nome AS pessoa_nome,
                    a.nome AS ambiente_nome, ra.status AS ra_status,
                    c.status AS chave_status
             FROM reserva r
