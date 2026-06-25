@@ -15,8 +15,24 @@ body {
 }
 
 /* ── Navbar ────────────────────────────────────────────────────────────────── */
-.navbar.bg-primary {
-    background-color: #1b4332 !important;
+.navbar-azul {
+    background-color: #cfe2ff !important;
+    border-bottom: 2px solid #9ec5fe;
+}
+.navbar-azul .navbar-brand,
+.navbar-azul .nav-link,
+.navbar-azul .navbar-text {
+    color: #0d1b2e !important;
+}
+.navbar-azul .nav-link:hover,
+.navbar-azul .nav-link:focus {
+    color: #0a58ca !important;
+}
+.navbar-azul .navbar-toggler {
+    border-color: #6ea8fe;
+}
+.navbar-azul .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280,0,0,0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 /* ── Botões primários ───────────────────────────────────────────────────────── */

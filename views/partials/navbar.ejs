@@ -1,5 +1,5 @@
 <% if (usuario) { %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light navbar-azul shadow-sm">
     <div class="container">
         <a class="navbar-brand fw-bold" href="/dashboard">
             <i class="bi bi-key-fill me-1"></i>SISGERI
@@ -68,11 +68,16 @@
 
             </ul>
 
-            <ul class="navbar-nav">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item me-3">
+                    <span class="navbar-text fw-semibold" id="relogio-navbar" style="font-size:0.95rem; color:#1a1a1a;">
+                        <i class="bi bi-clock me-1"></i><span id="hora-atual"></span>
+                    </span>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle me-1"></i><%= usuario.nome.split(' ')[0] %>
-                        <span class="badge bg-light text-primary ms-1 small"><%= usuario.perfil %></span>
+                        <span class="badge ms-1 small" style="background-color:#1b5e8c; color:#fff;"><%= usuario.perfil %></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><span class="dropdown-item-text text-muted small"><%= usuario.email || '' %></span></li>
@@ -88,4 +93,15 @@
         </div>
     </div>
 </nav>
+<script>
+(function () {
+    function atualizarHora() {
+        const agora = new Date();
+        document.getElementById('hora-atual').textContent =
+            agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    atualizarHora();
+    setInterval(atualizarHora, 1000);
+})();
+</script>
 <% } %>

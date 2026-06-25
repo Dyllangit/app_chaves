@@ -11,6 +11,9 @@ async function enviarEmail({ para, assunto, html }) {
 
 // Envia e-mail sem lançar exceção — retorna { sucesso, erro }
 async function tentarEnviarEmail(opcoes) {
+    if (!process.env.SMTP_HOST) {
+        return { sucesso: false, erro: 'SMTP não configurado' };
+    }
     try {
         await enviarEmail(opcoes);
         return { sucesso: true };
